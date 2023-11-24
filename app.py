@@ -20,9 +20,8 @@ while choice != 3:
         user_ip()
         choice = menu()
     elif choice == 2:
-        print("   Date       Entry",
-              "----------  -------------",
-              view_entries(), sep= "\n")
+        cur = view_entries()
+        print(cur.fetchall())
         choice = menu()
     else:
         print("\nInvalid choice, Try again!")

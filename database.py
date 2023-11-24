@@ -1,6 +1,7 @@
 import sqlite3
 
 conn = sqlite3.connect("data.db")
+#conn.row_factory = sqlite3.Row
 
 def create_table():
     with conn:
@@ -17,8 +18,4 @@ def add_entry(entry, date):
         conn.execute("INSERT INTO diary VALUES(?, ?)", (entry, date))
 
 def view_entries():
-    s = ""
-    for i in journal:
-        s += f"{i['date']}  {i['content']}\n"
-    return s
-
+    return conn.execute("SELECT * FROM diary;")

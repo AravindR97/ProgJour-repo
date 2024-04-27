@@ -1,35 +1,42 @@
-from database import add_entry, view_entries, close_db, create_table
+import time
+from database import add_entry, get_entries, close_connection
 
-def menu():
-    print("\nPlease select one of the following options:",
-      "1 - Add new entry for today.","2 - View entries.",
-      "3 - Exit.\n", sep= '\n')
-    return int(input("Your selection: "))
+def prompt():
+    date = input("Enter the date [dd-mm-yy]: ")
+    content = input("What did you learn today?\n")
+    add_entry(date, content)
 
-def user_ip():
-    entry = input("\nWhat did you learn today?\n")
-    date = input("\nEnter the date[dd/mm/yyyy]: ")
-    add_entry(entry, date)
-    print("\nNew entry added!")
+def view():
+    print("\n\nSTUDY JOURNAL\n----------------------------------------------------------\n")
+    for entry in get_entries():
+        print(entry[0], entry[1], sep="\n", end= "\n"*2)
+    print("\n----------------------------------------------------------\n")
 
-print("Welcome to programming diary!")
-choice = menu()
+print("Welcome to Study Journal!\n")
 
-while choice != 3:
+#Store the strings for repeated use
+menu = """\nPlease select one of the following options:
+1 - Add new entry for today
+2 - View entries
+3 - Exit
+
+Your selection: """
+
+choice = int(input(menu))
+
+while choice:
     if choice == 1:
-        user_ip()
-        choice = menu()
+        prompt()
     elif choice == 2:
-        cur = view_entries()
-        print(cur.fetchall())
-        choice = menu()
+        view()
+    elif choice == 3:
+        # I guess close_connection() can be added here instead.
+        break
     else:
-        print("\nInvalid choice, Try again!")
-        choice = menu()
+        print("Invalid choice. Please select one among 1, 2 and 3.")
+    choice = int(input(menu))
 
-close_db() 
-print("\nSee you again!")
-exit()
-
-if __name__ == "__main__":
-    main()
+print("\nClosing connection to database...")
+time.sleep(2)
+print("\nConnection closed.", "Bye-bye!", sep ="\n")
+close_connection()

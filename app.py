@@ -1,4 +1,5 @@
-from database import add_entry, get_entries
+import time
+from database import add_entry, get_entries, close_connection
 
 def prompt():
     date = input("Enter the date [dd-mm-yy]: ")
@@ -8,8 +9,8 @@ def prompt():
 def view():
     print("\n\nSTUDY JOURNAL\n----------------------------------------------------------\n")
     for entry in get_entries():
-        print(entry["date"], entry["content"], sep="\n")
-    print("\n----------------------------------------------------------\n") 
+        print(entry[0], entry[1], sep="\n", end= "\n"*2)
+    print("\n----------------------------------------------------------\n")
 
 print("Welcome to Study Journal!\n")
 
@@ -29,8 +30,13 @@ while choice:
     elif choice == 2:
         view()
     elif choice == 3:
-        print("\nBye-bye!")
+        # I guess close_connection() can be added here instead.
         break
     else:
         print("Invalid choice. Please select one among 1, 2 and 3.")
     choice = int(input(menu))
+
+print("\nClosing connection to database...")
+time.sleep(2)
+print("\nConnection closed.", "Bye-bye!", sep ="\n")
+close_connection()

@@ -6,8 +6,10 @@ def prompt():
     add_entry(date, content)
 
 def view():
+    print("\n\nSTUDY JOURNAL\n----------------------------------------------------------\n")
     for entry in get_entries():
-        print(entry["date"], entry["content"], sep="\n", end="\n"*2) 
+        print(entry["date"], entry["content"], sep="\n")
+    print("\n----------------------------------------------------------\n") 
 
 print("Welcome to Study Journal!\n")
 

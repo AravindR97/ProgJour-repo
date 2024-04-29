@@ -1,10 +1,24 @@
 import time
 from database import add_entry, get_entries, close_connection
 
+def set_content():
+    content = ""
+    while True:
+        try:
+            temp = input()
+            if temp:
+                content = content + "\n" + temp
+            else:
+                break
+        except EOFError:
+            break
+    return content
+
 def prompt():
     date = input("Enter the date [dd-mm-yy]: ")
-    content = input("What did you learn today?\n")
-    add_entry(date, content)
+    print("What did you learn today?\n")
+    add_entry(date, set_content())
+    print("\nEntry added!\n")
 
 def view():
     print("\n\nSTUDY JOURNAL\n----------------------------------------------------------\n")

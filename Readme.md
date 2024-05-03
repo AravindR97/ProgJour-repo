@@ -88,7 +88,9 @@ Periodic revision and repetition is necessary to register what we learn in our m
 ## Roadmap
 
 - [x] Base Version
-- [x] Multiple entries on a date
+- [x] Multi-line entry on a date
+- [ ] Multiple Sessions on a day
+- [ ] Edit/ Add on to existing entries
 
 ..
 
